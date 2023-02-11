@@ -2,13 +2,12 @@ package countdownTimerGUI360_60s;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
+
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.DecimalFormat;
@@ -55,13 +54,10 @@ public class CountdownTimerGUI360 {
             startButton.addMouseListener(this);
             startButton.setBackground(Color.WHITE);
             startButton.setBounds(10, 10, 80, 30);
-            startButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    angle = 0;
-                    timeRemaining = 60;
-                    startTimer();
-                }
+            startButton.addActionListener(e -> {
+                angle = 0;
+                timeRemaining = 60;
+                startTimer();
             });
             add(startButton);
         }
