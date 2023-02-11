@@ -9,6 +9,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.DecimalFormat;
 
 import javax.swing.*;
@@ -20,28 +22,21 @@ public class CountdownTimerGUI360 {
     }
 
     public CountdownTimerGUI360() {
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-                }
 
-                JFrame frame = new JFrame("Countdown Timer");
-                frame.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
-                frame.getRootPane().setBackground(Color.BLUE);
-                frame.setUndecorated(false);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.add(new TestPane());
-                frame.pack();
-                frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
-            }
-        });
+
+            JFrame frame = new JFrame("Countdown Timer");
+
+
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+            frame.add(new TestPane());
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+
     }
 
-    public class TestPane extends JPanel {
+    public class TestPane extends JPanel  implements MouseListener {
 
         private JButton startButton;
         private int angle;
@@ -50,10 +45,15 @@ public class CountdownTimerGUI360 {
         private DecimalFormat decimalFormat;
 
         public TestPane() {
+
+            this.setBackground(Color.WHITE);
             decimalFormat = new DecimalFormat("00");
             setLayout(null);
 
             startButton = new JButton("Start");
+            startButton.setFocusable(false);
+            startButton.addMouseListener(this);
+            startButton.setBackground(Color.WHITE);
             startButton.setBounds(10, 10, 80, 30);
             startButton.addActionListener(new ActionListener() {
                 @Override
@@ -102,6 +102,34 @@ public class CountdownTimerGUI360 {
             int width = g2d.getFontMetrics().stringWidth(time);
             g2d.drawString(time, x + 50 - width / 2, y + 50);
             g2d.dispose();
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+            startButton.setBackground(Color.red);
+            startButton.setForeground(Color.white);
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            startButton.setBackground(null);
+            startButton.setForeground(null);
         }
     }
 
